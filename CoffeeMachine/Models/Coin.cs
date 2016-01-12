@@ -8,7 +8,7 @@ namespace CoffeeMachine.Models
     /// <summary>
     /// Модель монеты
     /// </summary>
-    public class Сoin
+    public class Coin
     {
         /// <summary>
         /// Номер монеты

@@ -13,19 +13,27 @@ namespace CoffeeMachine.Models
         /// <summary>
         /// Монеты пользователя
         /// </summary>
-        public List<Сoin> UserCoins { get; set; }
+        public List<Coin> UserCoins { get; set; }
 
+        /// <summary>
+        /// Товар
+        /// </summary>
         public List<Product> Products { get; set; }
+
+        /// <summary>
+        /// Монеты кофемашины
+        /// </summary>
+        public List<Coin> VendingMachineCoins { get; set; }
 
         public VendingMachine()
         {
             // начальные данные
-            UserCoins = new List<Сoin>
+            UserCoins = new List<Coin>
             {
-                new Сoin { Number = 1, Count =  10},
-                new Сoin { Number = 2, Count =  30},
-                new Сoin { Number = 5, Count =  20},
-                new Сoin { Number = 10, Count =  15}
+                new Coin { Number = 1, Count =  10},
+                new Coin { Number = 2, Count =  30},
+                new Coin { Number = 5, Count =  20},
+                new Coin { Number = 10, Count =  15}
             };
 
             Products = new List<Product>
@@ -34,6 +42,14 @@ namespace CoffeeMachine.Models
                 new Product { Title = "Кофе", Price = 18, Count = 20 },
                 new Product { Title = "Кофе с молоком", Price = 21, Count = 20 },
                 new Product { Title = "Сок", Price = 35, Count = 15 },
+            };
+
+            VendingMachineCoins = new List<Coin>
+            {
+                new Coin {Number =1, Count=100 },
+                new Coin {Number =2, Count=100 },
+                new Coin {Number =3, Count=100 },
+                new Coin {Number =4, Count=100 }
             };
         }
     }

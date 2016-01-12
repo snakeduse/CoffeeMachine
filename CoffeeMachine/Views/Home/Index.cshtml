@@ -4,6 +4,23 @@
     ViewBag.Title = "Home Page";
 }
 
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header navbar-brand">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <a>Кошелек VM</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @foreach (var userCoin in Model.VendingMachineCoins)
+                {
+                    <li><a class="btn btn-link">@userCoin.Number руб (@userCoin.Count шт.) </a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
 <h2>Товар</h2>
 
 @foreach (var product in Model.Products)
