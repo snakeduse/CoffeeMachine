@@ -29,5 +29,15 @@ namespace CoffeeMachine.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Increment(int money)
+        {
+            _vendingMachine.VendingMachineMoney += money;
+            
+            //TODO: переделать монеты на словарь и сделать инкримент монет           
+
+            return Json(new { VendingMachineMoney  = _vendingMachine.VendingMachineMoney }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
