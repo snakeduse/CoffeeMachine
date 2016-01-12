@@ -1,6 +1,18 @@
-﻿@{
+﻿@model CoffeeMachine.Models.VendingMachine
+
+@{
     ViewBag.Title = "Home Page";
-    var userMoney = new List<int> { 1, 2, 5, 10 };
+}
+
+<h2>Товар</h2>
+
+@foreach (var product in Model.Products)
+{
+    <div>
+        <h3>@product.Title</h3>
+        <span>@product.Price руб. @product.Count порций</span>
+    </div>
+    <hr />
 }
 
 <div class="navbar navbar-inverse navbar-fixed-bottom">
@@ -11,9 +23,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                @foreach(var money in userMoney)
+                @foreach (var userCoin in Model.UserCoins)
                 {
-                    <li><a class="btn btn-link">@money руб</a></li>
+                    <li><a class="btn btn-link">@userCoin.Number руб (@userCoin.Count шт.) </a></li>
                 }
             </ul>
         </div>
