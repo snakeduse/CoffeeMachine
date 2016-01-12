@@ -9,7 +9,7 @@ namespace CoffeeMachine.Controllers
 {
     public class HomeController : Controller
     {
-        private VendingMachine _vendingMachine = new VendingMachine();
+        private static VendingMachine _vendingMachine = new VendingMachine();
 
         public ActionResult Index()
         {

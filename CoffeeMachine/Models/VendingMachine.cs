@@ -25,6 +25,11 @@ namespace CoffeeMachine.Models
         /// </summary>
         public List<Coin> VendingMachineCoins { get; set; }
 
+        /// <summary>
+        /// Внесенная сумма в VM
+        /// </summary>
+        public int VendingMachineMoney { get; set; }
+
         public VendingMachine()
         {
             // начальные данные

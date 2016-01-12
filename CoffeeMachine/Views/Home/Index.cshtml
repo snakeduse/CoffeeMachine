@@ -12,14 +12,18 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                @foreach (var userCoin in Model.VendingMachineCoins)
+                @foreach (var vmCoin in Model.VendingMachineCoins)
                 {
-                    <li><a class="btn btn-link">@userCoin.Number руб (@userCoin.Count шт.) </a></li>
+                    <li>
+                        <a class="btn btn-link">@vmCoin.Number руб (<span class="money-button-@vmCoin.Number">@vmCoin.Count</span> шт.) </a>
+                    </li>
                 }
             </ul>
         </div>
     </div>
 </div>
+
+<p>Внесенная сумма: @Model.VendingMachineMoney</p>
 
 <h2>Товар</h2>
 
@@ -42,7 +46,9 @@
             <ul class="nav navbar-nav">
                 @foreach (var userCoin in Model.UserCoins)
                 {
-                    <li><a class="btn btn-link">@userCoin.Number руб (@userCoin.Count шт.) </a></li>
+                    <li>
+                        <a class="btn btn-link bnt-user-money-button-@userCoin.Number">@userCoin.Number руб (<span class="user-money-button-@userCoin.Number">@userCoin.Count</span> шт.) </a>
+                    </li>
                 }
             </ul>
         </div>
