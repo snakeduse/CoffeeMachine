@@ -39,12 +39,15 @@ namespace CoffeeMachine.Controllers
         {
             try
             {
-                // изменяем внесенную сумму
-                _vendingMachine.VendingMachineMoney += money;
-
                 // вычитаем количество монет в кошельке пользователя
                 var userMoney = _vendingMachine.UserCoins.First(x => x.Number == money);
                 userMoney.Count = Math.Max(--userMoney.Count, 0);
+
+                // если в кошельке есть монеты, то изменяем внесенную сумму
+                if (userMoney.Count > 0)
+                {
+                    _vendingMachine.VendingMachineMoney += money;
+                }
 
                 return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, CountMoney = userMoney.Count }, JsonRequestBehavior.AllowGet);
             }
@@ -58,7 +61,11 @@ namespace CoffeeMachine.Controllers
             }
         }
 
-        public ActionResult X(int money)
+        /// <summary>
+        /// Получить сдачу
+        /// </summary>
+        /// <param name="money">Количество денег в VM для получения сдачи</param>
+        public ActionResult Residue(int money)
         {
             // работаем с монетами, отсортированными в порядке убывания
             // для того, чтобы начинать с наибольшей по значению монеты
@@ -68,7 +75,7 @@ namespace CoffeeMachine.Controllers
                 var currentCount = 0;
                 while (money >= userCoin.Number)
                 {
-                    currentCount += 1;
+                    currentCount++;
                     money -= userCoin.Number;
                 }
 

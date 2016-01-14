@@ -45,7 +45,7 @@
         var money = $(".vending-machine-money").text();
         $.ajax({
             type: 'GET',
-            url: '/Home/x',
+            url: '/Home/Residue',
             dataType: 'json',
             data: { money: money },
             success: function (data) {
