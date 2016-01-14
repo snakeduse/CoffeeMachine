@@ -3,7 +3,7 @@
     var incrementVendingMachineMoney = function (money, countMoney) {
         $.ajax({
             type: 'GET',
-            url: '/Home/Increment',
+            url: '/Home/AddMoney',
             dataType: 'json',
             data: { money: money },
             success: function (data) {
@@ -23,6 +23,7 @@
         });
     };
 
+    // Обработчики событий, нажатия на кнопки с количеством денег пользователя
     $(".bnt-user-money-button-1").on("click", function (e) {
         incrementVendingMachineMoney(1, $(".user-money-button-1"));
     });

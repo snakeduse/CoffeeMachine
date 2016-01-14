@@ -30,8 +30,12 @@ namespace CoffeeMachine.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Обработка запроса добавления денег в VM
+        /// </summary>
+        /// <param name="money">Количество денег, для добавления в VM</param>
         [HttpGet]
-        public ActionResult Increment(int money)
+        public ActionResult AddMoney(int money)
         {
             try
             {
