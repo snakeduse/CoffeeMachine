@@ -73,5 +73,14 @@ namespace CoffeeMachine.Controllers
 
             return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, UserCoins = _vendingMachine.UserCoins }, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// Купить товар
+        /// </summary>
+        /// <param name="productId">Идентификатор товара для покупки</param>
+        public ActionResult Buy(int productId)
+        {
+            return Json("Success", JsonRequestBehavior.AllowGet);
+        }
     }
 }

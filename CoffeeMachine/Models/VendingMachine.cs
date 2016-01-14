@@ -43,10 +43,10 @@ namespace CoffeeMachine.Models
 
             Products = new List<Product>
             {
-                new Product { Title = "Чай", Price = 13, Count = 10 },
-                new Product { Title = "Кофе", Price = 18, Count = 20 },
-                new Product { Title = "Кофе с молоком", Price = 21, Count = 20 },
-                new Product { Title = "Сок", Price = 35, Count = 15 },
+                new Product { Id = 1, Title = "Чай", Price = 13, Count = 10 },
+                new Product { Id = 2, Title = "Кофе", Price = 18, Count = 20 },
+                new Product { Id = 3, Title = "Кофе с молоком", Price = 21, Count = 20 },
+                new Product { Id = 4, Title = "Сок", Price = 35, Count = 15 },
             };
 
             VendingMachineCoins = new List<Coin>

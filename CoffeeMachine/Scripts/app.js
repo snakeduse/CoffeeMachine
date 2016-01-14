@@ -65,4 +65,33 @@
             }
         });
     });
+
+    // купить товар
+    $(".btn-buy").on("click", function (e) {
+        var productId = $(this).attr("Id");
+        var moneyInMachine = $(".vending-machine-money").text();
+        var productPrice = $(this).parent("div").find(".product-price").text();
+
+        if(productPrice > moneyInMachine){
+            alert("Недостаточно средств");
+            return;
+        }
+
+        $.ajax({
+            type: 'GET',
+            url: '/Home/Buy',
+            dataType: 'json',
+            data: { productId: productId },
+            success: function (data) {
+                if (data.Error) {
+                    alert(data.Error);
+                } else {
+                    console.log(data);
+                }
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+    });
 });

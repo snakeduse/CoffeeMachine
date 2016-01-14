@@ -36,8 +36,8 @@
 
     <div>
         <h3>@product.Title</h3>
-        <span>@product.Price руб. @product.Count порций</span>
-        <button class="btn btn-default">
+        <span class="product-price">@product.Price</span> руб. @product.Count порций
+        <button class="btn btn-default btn-buy" id="@product.Id">
             <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
             Купить
         </button>

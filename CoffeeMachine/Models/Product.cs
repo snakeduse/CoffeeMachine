@@ -11,6 +11,11 @@ namespace CoffeeMachine.Models
     public class Product
     {
         /// <summary>
+        /// Идентификатор товара
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Название товара
         /// </summary>
         public string Title { get; set; }
