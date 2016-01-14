@@ -34,10 +34,11 @@ namespace CoffeeMachine.Controllers
         public ActionResult Increment(int money)
         {
             _vendingMachine.VendingMachineMoney += money;
-            
-            //TODO: переделать монеты на словарь и сделать инкримент монет           
 
-            return Json(new { VendingMachineMoney  = _vendingMachine.VendingMachineMoney }, JsonRequestBehavior.AllowGet);
+            var userMoney = _vendingMachine.UserCoins.First(x => x.Number == money);
+            userMoney.Count = Math.Max(--userMoney.Count, 0);
+
+            return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, CountMoney = userMoney.Count }, JsonRequestBehavior.AllowGet);
         }
     }
 }
