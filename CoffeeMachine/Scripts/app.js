@@ -7,11 +7,15 @@
             dataType: 'json',
             data: { money: money },
             success: function (data) {
-                // увеличиваем внесенную сумму в машине
-                $(".vending-machine-money").text(data.VendingMachineMoney);
+                if (data.Error) {
+                    alert(data.Error);
+                } else {
+                    // увеличиваем внесенную сумму в машине
+                    $(".vending-machine-money").text(data.VendingMachineMoney);
 
-                // уменьшаем количество монет.
-                countMoney.text(data.CountMoney);
+                    // уменьшаем количество монет.
+                    countMoney.text(data.CountMoney);
+                }
             },
             failure: function (errMsg) {
                 alert(errMsg);
