@@ -60,17 +60,24 @@ namespace CoffeeMachine.Controllers
 
         public ActionResult X(int money)
         {
-            foreach (var userCoin in _vendingMachine.UserCoins)
+            // работаем с монетами, отсортированными в порядке убывания
+            // для того, чтобы начинать с наибольшей по значению монеты
+            var descCoins = _vendingMachine.UserCoins.OrderByDescending(x => x.Number);
+            foreach (var userCoin in descCoins)
             {
                 var currentCount = 0;
                 while (money >= userCoin.Number)
                 {
-                    currentCount += userCoin.Number;
+                    currentCount += 1;
                     money -= userCoin.Number;
                 }
+
+                userCoin.Count += currentCount;
             }
 
-            return Json(new { UserCoins = _vendingMachine.UserCoins }, JsonRequestBehavior.AllowGet);
+            _vendingMachine.VendingMachineMoney = 0;
+
+            return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, UserCoins = _vendingMachine.UserCoins }, JsonRequestBehavior.AllowGet);
         }
     }
 }

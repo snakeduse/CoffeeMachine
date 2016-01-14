@@ -52,9 +52,12 @@
                 if (data.Error) {
                     alert(data.Error);
                 } else {
-                    for (var userCoin in data.UserCoins) {
-                        $(".user-money-button-" + data.UserCoins[userCoin].Number).text(data.UserCoins[userCoin].Count);
+                    for (var i in data.UserCoins) {
+                        console.log(data.UserCoins[i]);
+                        $(".user-money-button-" + data.UserCoins[i].Number).text(data.UserCoins[i].Count);
                     }
+
+                    $(".vending-machine-money").text(data.VendingMachineMoney);
                 }
             },
             failure: function (errMsg) {
