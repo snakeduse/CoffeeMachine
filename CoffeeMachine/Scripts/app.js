@@ -39,4 +39,27 @@
     $(".bnt-user-money-button-10").on("click", function (e) {
         incrementVendingMachineMoney(10, $(".user-money-button-10"));
     });
+
+    // получить сдачу
+    $(".btn-residue").on("click", function (e) {
+        var money = $(".vending-machine-money").text();
+        $.ajax({
+            type: 'GET',
+            url: '/Home/x',
+            dataType: 'json',
+            data: { money: money },
+            success: function (data) {
+                if (data.Error) {
+                    alert(data.Error);
+                } else {
+                    for (var userCoin in data.UserCoins) {
+                        $(".user-money-button-" + data.UserCoins[userCoin].Number).text(data.UserCoins[userCoin].Count);
+                    }
+                }
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+    });
 });

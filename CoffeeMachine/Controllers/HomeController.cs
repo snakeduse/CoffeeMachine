@@ -57,5 +57,20 @@ namespace CoffeeMachine.Controllers
                 return Json(new { Error = $"Во время внесения денег произошла ошибка. {ex.Message}" }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult X(int money)
+        {
+            foreach (var userCoin in _vendingMachine.UserCoins)
+            {
+                var currentCount = 0;
+                while (money >= userCoin.Number)
+                {
+                    currentCount += userCoin.Number;
+                    money -= userCoin.Number;
+                }
+            }
+
+            return Json(new { UserCoins = _vendingMachine.UserCoins }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
