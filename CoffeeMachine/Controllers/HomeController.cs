@@ -16,20 +16,6 @@ namespace CoffeeMachine.Controllers
             return View(_vendingMachine);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         /// <summary>
         /// Обработка запроса добавления денег в VM
         /// </summary>
@@ -39,17 +25,18 @@ namespace CoffeeMachine.Controllers
         {
             try
             {
-                // вычитаем количество монет в кошельке пользователя
-                var userMoney = _vendingMachine.UserCoins.First(x => x.Number == money);
-                userMoney.Count = Math.Max(--userMoney.Count, 0);
+                var userCoins = _vendingMachine.UserCoins.First(x => x.Number == money);
 
                 // если в кошельке есть монеты, то изменяем внесенную сумму
-                if (userMoney.Count > 0)
+                if (userCoins.Count > 0)
                 {
                     _vendingMachine.VendingMachineMoney += money;
                 }
 
-                return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, CountMoney = userMoney.Count }, JsonRequestBehavior.AllowGet);
+                // вычитаем количество монет в кошельке пользователя
+                userCoins.Count = Math.Max(--userCoins.Count, 0);
+
+                return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, CountMoney = userCoins.Count }, JsonRequestBehavior.AllowGet);
             }
             catch (InvalidOperationException ex)
             {
