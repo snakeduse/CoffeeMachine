@@ -7,7 +7,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header navbar-brand">
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
             <a>Кошелек VM</a>
         </div>
         <div class="navbar-collapse collapse">
@@ -33,9 +33,14 @@
 
 @foreach (var product in Model.Products)
 {
+
     <div>
         <h3>@product.Title</h3>
         <span>@product.Price руб. @product.Count порций</span>
+        <button class="btn btn-default">
+            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+            Купить
+        </button>
     </div>
     <hr />
 }
