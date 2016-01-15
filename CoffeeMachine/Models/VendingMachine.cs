@@ -51,10 +51,10 @@ namespace CoffeeMachine.Models
 
             VendingMachineCoins = new List<Coin>
             {
-                new Coin {Number =1, Count=100 },
-                new Coin {Number =2, Count=100 },
-                new Coin {Number =3, Count=100 },
-                new Coin {Number =4, Count=100 }
+                new Coin {Number = 1, Count=100 },
+                new Coin {Number = 2, Count=100 },
+                new Coin {Number = 5, Count=100 },
+                new Coin {Number = 10, Count=100 }
             };
         }
     }

@@ -80,7 +80,35 @@ namespace CoffeeMachine.Controllers
         /// <param name="productId">Идентификатор товара для покупки</param>
         public ActionResult Buy(int productId)
         {
-            return Json("Success", JsonRequestBehavior.AllowGet);
+            var product = _vendingMachine.Products.First(x => x.Id == productId);
+
+            if (product.Price > _vendingMachine.VendingMachineMoney)
+            {
+                return Json(new { Error = "Недостаточно средств" }, JsonRequestBehavior.AllowGet);
+            }
+
+            // уменьшаем количество товара
+            product.Count--;
+
+            // вычитаем сумму товара из внесенной суммы
+            _vendingMachine.VendingMachineMoney -= product.Price;
+
+            // зачисляем деньги в кошелек VM
+            var descCoins = _vendingMachine.VendingMachineCoins.OrderByDescending(x => x.Number);
+            var price = product.Price;
+            foreach (var vmCoin in descCoins)
+            {
+                var currentCount = 0;
+                while (price >= vmCoin.Number)
+                {
+                    currentCount++;
+                    price -= vmCoin.Number;
+                }
+
+                vmCoin.Count += currentCount;
+            }
+
+            return Json(new { Product = product, VendingMachineMoney = _vendingMachine.VendingMachineMoney, VendingMachineCoins = _vendingMachine.VendingMachineCoins }, JsonRequestBehavior.AllowGet);
         }
     }
 }

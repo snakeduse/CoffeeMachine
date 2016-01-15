@@ -53,7 +53,6 @@
                     alert(data.Error);
                 } else {
                     for (var i in data.UserCoins) {
-                        console.log(data.UserCoins[i]);
                         $(".user-money-button-" + data.UserCoins[i].Number).text(data.UserCoins[i].Count);
                     }
 
@@ -86,7 +85,18 @@
                 if (data.Error) {
                     alert(data.Error);
                 } else {
-                    console.log(data);
+                    // изменить количество продукта
+                    $(this).parent("div").find(".product-count").text(data.Product.Count);
+
+                    // меняем сумму VM
+                    $(".vending-machine-money").text(data.VendingMachineMoney);
+
+                    // начисляем деньги в VM
+                    for (var i in data.VendingMachineCoins) {
+                        $(".money-button-" + data.VendingMachineCoins[i].Number).text(data.VendingMachineCoins[i].Count);
+                    }
+
+                    alert("Спасибо!");
                 }
             },
             failure: function (errMsg) {
