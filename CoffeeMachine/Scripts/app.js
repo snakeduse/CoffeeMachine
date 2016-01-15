@@ -67,11 +67,12 @@
 
     // купить товар
     $(".btn-buy").on("click", function (e) {
-        var productId = $(this).attr("Id");
+        var self = this;
+        var productId = $(self).attr("Id");
         var moneyInMachine = $(".vending-machine-money").text();
-        var productPrice = $(this).parent("div").find(".product-price").text();
+        var productPrice = $(self).parent("div").find(".product-price").text();
 
-        if(productPrice > moneyInMachine){
+        if (productPrice > moneyInMachine) {
             alert("Недостаточно средств");
             return;
         }
@@ -86,7 +87,7 @@
                     alert(data.Error);
                 } else {
                     // изменить количество продукта
-                    $(this).parent("div").find(".product-count").text(data.Product.Count);
+                    $(self).parent("div").find(".product-count").text(data.Product.Count);
 
                     // меняем сумму VM
                     $(".vending-machine-money").text(data.VendingMachineMoney);
