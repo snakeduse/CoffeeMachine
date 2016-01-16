@@ -50,13 +50,41 @@ namespace CoffeeMachine.Services
 
         public void Buy(int productId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var product = _vendingMachineData.Products.First(x => x.Id == productId);
+
+                if (product.Price > _vendingMachineData.VendingMachineMoney)
+                {
+                    throw new VendingMachineServiceException("Недостаточно средств");
+                }
+
+                // уменьшаем количество товара
+                product.Count--;
+
+                // вычитаем сумму товара из внесенной суммы
+                _vendingMachineData.VendingMachineMoney -= product.Price;
+
+                // зачисляем деньги в кошелек VM
+                _vendingMachineData.VendingMachinePurse.PutMoney(product.Price);
+            }
+            catch(NullReferenceException ex)
+            {
+                throw new VendingMachineServiceException($"Во время покупки товара произошла ошибка. {ex.Message}");
+            }
         }
 
         public void Residue(int money)
         {
-            _vendingMachineData.UserPurse.PutMoney(money);
-            _vendingMachineData.VendingMachineMoney = 0;
+            try
+            {
+                _vendingMachineData.UserPurse.PutMoney(money);
+                _vendingMachineData.VendingMachineMoney = 0;
+            }
+            catch(NullReferenceException ex)
+            {
+                throw new VendingMachineServiceException($"Во время начисления сдачи. {ex.Message}");
+            }
         }
     }
 }

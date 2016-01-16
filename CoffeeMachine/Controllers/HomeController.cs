@@ -34,9 +34,9 @@ namespace CoffeeMachine.Controllers
             try
             {
                 _vendingMachineService.AddMoney(money);
-                
+
                 // TODO: работать с данными напрямую плохо, но пока не ясно как более грамотно сделать.
-                // Гонять всю модель туда-сюда: плохо. Нужно передавать только требуемые данные
+                // Гонять всю модель туда-сюда не хочется. Нужно передавать только требуемые данные
                 return Json(
                     new {
                         VendingMachineMoney = _vendingMachine.VendingMachineMoney,
@@ -56,9 +56,18 @@ namespace CoffeeMachine.Controllers
         /// <param name="money">Количество денег в VM для получения сдачи</param>
         public ActionResult Residue(int money)
         {
-            _vendingMachineService.Residue(money);
+            try
+            {
+                _vendingMachineService.Residue(money);
 
-            return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, UserCoins = _vendingMachine.UserPurse.Coins }, JsonRequestBehavior.AllowGet);
+                // TODO: работать с данными напрямую плохо, но пока не ясно как более грамотно сделать.
+                // Гонять всю модель туда-сюда не хочется. Нужно передавать только требуемые данные
+                return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, UserCoins = _vendingMachine.UserPurse.Coins }, JsonRequestBehavior.AllowGet);
+            }
+            catch(VendingMachineServiceException ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
         }
 
         /// <summary>
@@ -67,23 +76,23 @@ namespace CoffeeMachine.Controllers
         /// <param name="productId">Идентификатор товара для покупки</param>
         public ActionResult Buy(int productId)
         {
-            var product = _vendingMachine.Products.First(x => x.Id == productId);
-
-            if (product.Price > _vendingMachine.VendingMachineMoney)
+            try
             {
-                return Json(new { Error = "Недостаточно средств" }, JsonRequestBehavior.AllowGet);
+                _vendingMachineService.Buy(productId);
+
+                // TODO: работать с данными напрямую плохо, но пока не ясно как более грамотно сделать.
+                // Гонять всю модель туда-сюда не хочется. Нужно передавать только требуемые данные
+                return Json(
+                    new {
+                        Product = _vendingMachine.Products.First(x => x.Id == productId),
+                        VendingMachineMoney = _vendingMachine.VendingMachineMoney,
+                        VendingMachineCoins = _vendingMachine.VendingMachinePurse.Coins }, 
+                    JsonRequestBehavior.AllowGet);
             }
-
-            // уменьшаем количество товара
-            product.Count--;
-
-            // вычитаем сумму товара из внесенной суммы
-            _vendingMachine.VendingMachineMoney -= product.Price;
-
-            // зачисляем деньги в кошелек VM
-            _vendingMachine.VendingMachinePurse.PutMoney(product.Price);
-
-            return Json(new { Product = product, VendingMachineMoney = _vendingMachine.VendingMachineMoney, VendingMachineCoins = _vendingMachine.VendingMachinePurse }, JsonRequestBehavior.AllowGet);
+            catch(VendingMachineServiceException ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
