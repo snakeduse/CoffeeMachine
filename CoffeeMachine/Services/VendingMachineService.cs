@@ -24,6 +24,7 @@ namespace CoffeeMachine.Services
         /// <summary>
         /// Добавить деньги в аппарат
         /// </summary>
+        /// <param name="money">Количество денег для добавления</param>
         public void AddMoney(int money)
         {
             try
@@ -48,6 +49,10 @@ namespace CoffeeMachine.Services
             }
         }
 
+        /// <summary>
+        /// Выдать сдачу
+        /// </summary>
+        /// <param name="money">Количество денег для получения сдачи</param>
         public void Buy(int productId)
         {
             try
@@ -74,6 +79,10 @@ namespace CoffeeMachine.Services
             }
         }
 
+        /// <summary>
+        /// Купить товар
+        /// </summary>
+        /// <param name="productId">Идентификатор товара для покупки</param>
         public void Residue(int money)
         {
             try

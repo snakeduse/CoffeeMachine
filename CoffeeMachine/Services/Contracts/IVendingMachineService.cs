@@ -14,6 +14,7 @@ namespace CoffeeMachine.Services.Contracts
         /// <summary>
         /// Добавить деньги в аппарат
         /// </summary>
+        /// <param name="money">Количество денег для добавления</param>
         void AddMoney(int money);
 
         /// <summary>
