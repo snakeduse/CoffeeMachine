@@ -55,7 +55,8 @@ namespace CoffeeMachine.Services
 
         public void Residue(int money)
         {
-            throw new NotImplementedException();
+            _vendingMachineData.UserPurse.PutMoney(money);
+            _vendingMachineData.VendingMachineMoney = 0;
         }
     }
 }

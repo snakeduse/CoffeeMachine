@@ -56,10 +56,9 @@ namespace CoffeeMachine.Controllers
         /// <param name="money">Количество денег в VM для получения сдачи</param>
         public ActionResult Residue(int money)
         {
-            _vendingMachine.UserPurse.PutMoney(money);
-            _vendingMachine.VendingMachineMoney = 0;
+            _vendingMachineService.Residue(money);
 
-            return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, UserCoins = _vendingMachine.UserPurse }, JsonRequestBehavior.AllowGet);
+            return Json(new { VendingMachineMoney = _vendingMachine.VendingMachineMoney, UserCoins = _vendingMachine.UserPurse.Coins }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
