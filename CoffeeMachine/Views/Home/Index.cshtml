@@ -10,7 +10,7 @@
             <span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
             <a>Кошелек VM</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-left">
             <ul class="nav navbar-nav">
                 @foreach (var vmCoin in Model.VendingMachinePurse.Coins)
                 {
@@ -20,14 +20,13 @@
                 }
             </ul>
         </div>
+
+        <div class="nav navbar-right navbar-collapse collapse navbar-text">
+            <span class="vending-machine-money">@Model.VendingMachineMoney</span> руб.
+            <a class="btn-residue" href="#">Сдача</a>
+        </div>
     </div>
 </div>
-
-<p>
-    Внесенная сумма:
-    <span class="vending-machine-money">@Model.VendingMachineMoney</span> руб.
-    <button class="btn btn-default btn-residue">Сдача</button>
-</p>
 
 <h2>Товар</h2>
 
