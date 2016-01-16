@@ -46,7 +46,7 @@ namespace CoffeeMachine.Controllers
             }
             catch(VendingMachineServiceException ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                return Json(new { Error = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -66,7 +66,7 @@ namespace CoffeeMachine.Controllers
             }
             catch(VendingMachineServiceException ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                return Json(new { Error = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -91,7 +91,7 @@ namespace CoffeeMachine.Controllers
             }
             catch(VendingMachineServiceException ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                return Json(new { Error = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
     }
