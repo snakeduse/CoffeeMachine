@@ -41,11 +41,11 @@ namespace CoffeeMachine.Services
             }
             catch (InvalidOperationException ex)
             {
-                throw new VendingMachineServiceException($"Во время внесения денег произошла ошибка. {ex.Message}");
+                throw new VendingMachineServiceException("Во время внесения денег произошла ошибка. "+ ex.Message);
             }
             catch (NullReferenceException ex)
             {
-                throw new VendingMachineServiceException($"Во время внесения денег произошла ошибка. {ex.Message}");
+                throw new VendingMachineServiceException("Во время внесения денег произошла ошибка. "+ ex.Message);
             }
         }
 
@@ -75,7 +75,7 @@ namespace CoffeeMachine.Services
             }
             catch(NullReferenceException ex)
             {
-                throw new VendingMachineServiceException($"Во время покупки товара произошла ошибка. {ex.Message}");
+                throw new VendingMachineServiceException("Во время покупки товара произошла ошибка. "+ ex.Message);
             }
         }
 
@@ -92,7 +92,7 @@ namespace CoffeeMachine.Services
             }
             catch(NullReferenceException ex)
             {
-                throw new VendingMachineServiceException($"Во время начисления сдачи. {ex.Message}");
+                throw new VendingMachineServiceException("Во время начисления сдачи. "+ ex.Message);
             }
         }
     }

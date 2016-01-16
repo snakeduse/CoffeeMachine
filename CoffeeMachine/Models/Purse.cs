@@ -19,14 +19,19 @@ namespace CoffeeMachine.Models
         /// Есть ли деньги указанного типа в кошельке
         /// </summary>
         /// <param name="money">Тип денег</param>
-        public bool IsExistsMoney(int money) => GetCount(money) > 0;
+        public bool IsExistsMoney(int money)
+        {
+            return GetCount(money) > 0;
+        }
 
         /// <summary>
         /// Получить количество монет в кошельке
         /// </summary>
         /// <param name="money">Монета, для которой нужно получить количество</param>
-        public int GetCount(int money) =>
-            Coins.First(x => x.Number == money).Count; 
+        public int GetCount(int money)
+        {
+            return Coins.First(x => x.Number == money).Count;
+        }            
 
         public Purse(List<Coin> coins)
         {

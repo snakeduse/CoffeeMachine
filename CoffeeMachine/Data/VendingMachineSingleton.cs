@@ -43,10 +43,16 @@ namespace CoffeeMachine.Data
         private sealed class SingletonCreator
         {
             private static readonly VendingMachineDataSingleton instance = new VendingMachineDataSingleton();
-            public static VendingMachineDataSingleton Instance => instance;
+            public static VendingMachineDataSingleton Instance { get { return instance; } }
         }
 
-        public static VendingMachineDataSingleton Instance => SingletonCreator.Instance;
+        public static VendingMachineDataSingleton Instance
+        {
+            get
+            {
+                return SingletonCreator.Instance;
+            }
+        }
 
         /// <summary>
         /// Кошелек пользователя
