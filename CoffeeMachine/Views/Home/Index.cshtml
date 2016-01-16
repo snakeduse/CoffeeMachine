@@ -1,4 +1,4 @@
-﻿@model CoffeeMachine.Models.VendingMachine
+﻿@model CoffeeMachine.Models.VendingMachineDataSingleton
 
 @{
     ViewBag.Title = "Home Page";
@@ -12,7 +12,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                @foreach (var vmCoin in Model.VendingMachineCoins)
+                @foreach (var vmCoin in Model.VendingMachinePurse.Coins)
                 {
                     <li>
                         <a class="btn btn-link">@vmCoin.Number руб (<span class="money-button-@vmCoin.Number">@vmCoin.Count</span> шт.) </a>
@@ -54,7 +54,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                @foreach (var userCoin in Model.UserCoins)
+                @foreach (var userCoin in Model.UserPurse.Coins)
                 {
                     <li>
                         <a class="btn btn-link bnt-user-money-button-@userCoin.Number">@userCoin.Number руб (<span class="user-money-button-@userCoin.Number">@userCoin.Count</span> шт.) </a>
