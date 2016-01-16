@@ -1,5 +1,7 @@
-﻿using CoffeeMachine.Models;
+﻿using CoffeeMachine.Data.Contracts;
+using CoffeeMachine.Models;
 using CoffeeMachine.Services.Contracts;
+using CoffeeMachine.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +14,9 @@ namespace CoffeeMachine.Services
     /// </summary>
     public class VendingMachineService : IVendingMachineService
     {
-        private VendingMachineDataSingleton _vendingMachineData;
+        private IVendingMachineData _vendingMachineData;
 
-        public VendingMachineService(VendingMachineDataSingleton vendingMachineData)
+        public VendingMachineService(IVendingMachineData vendingMachineData)
         {
             _vendingMachineData = vendingMachineData;
         }
@@ -38,11 +40,11 @@ namespace CoffeeMachine.Services
             }
             catch (InvalidOperationException ex)
             {
-                throw new Exception($"Во время внесения денег произошла ошибка. {ex.Message}");
+                throw new VendingMachineServiceException($"Во время внесения денег произошла ошибка. {ex.Message}");
             }
             catch (NullReferenceException ex)
             {
-                throw new Exception($"Во время внесения денег произошла ошибка. {ex.Message}");
+                throw new VendingMachineServiceException($"Во время внесения денег произошла ошибка. {ex.Message}");
             }
         }
 

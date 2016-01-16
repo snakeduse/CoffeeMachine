@@ -9,7 +9,7 @@ namespace CoffeeMachine.Services.Contracts
     /// <summary>
     /// Сервис аппарата по продаже кофе 
     /// </summary>
-    interface IVendingMachineService
+    public interface IVendingMachineService
     {
         /// <summary>
         /// Добавить деньги в аппарат

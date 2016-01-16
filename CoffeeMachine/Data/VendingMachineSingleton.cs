@@ -1,14 +1,16 @@
-﻿using System;
+﻿using CoffeeMachine.Data.Contracts;
+using CoffeeMachine.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CoffeeMachine.Models
+namespace CoffeeMachine.Data
 {
     /// <summary>
     /// Модель, которая хранит данные аппарата по продаже кофе
     /// </summary>
-    public class VendingMachineDataSingleton
+    public class VendingMachineDataSingleton : IVendingMachineData
     {
         protected VendingMachineDataSingleton()
         {

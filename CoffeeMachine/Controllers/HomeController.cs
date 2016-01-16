@@ -1,6 +1,9 @@
-﻿using CoffeeMachine.Models;
+﻿using CoffeeMachine.Data;
+using CoffeeMachine.Data.Contracts;
+using CoffeeMachine.Models;
 using CoffeeMachine.Services;
 using CoffeeMachine.Services.Contracts;
+using CoffeeMachine.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +14,7 @@ namespace CoffeeMachine.Controllers
 {
     public class HomeController : Controller
     {
-        private VendingMachineDataSingleton _vendingMachine = VendingMachineDataSingleton.Instance;
+        private IVendingMachineData _vendingMachine = VendingMachineDataSingleton.Instance;
         private readonly IVendingMachineService _vendingMachineService = 
             new VendingMachineService(VendingMachineDataSingleton.Instance);
 
@@ -27,15 +30,21 @@ namespace CoffeeMachine.Controllers
         [HttpGet]
         public ActionResult AddMoney(int money)
         {
-            _vendingMachineService.AddMoney(money);
-            var count = _vendingMachine.UserPurse.GetCount(money);
+            try {
+                _vendingMachineService.AddMoney(money);
+                var count = _vendingMachine.UserPurse.GetCount(money);
 
-            return Json(
-                new {
-                    VendingMachineMoney = _vendingMachine.VendingMachineMoney,
-                    CountMoney = count
-                }, 
-                JsonRequestBehavior.AllowGet);
+                return Json(
+                    new {
+                        VendingMachineMoney = _vendingMachine.VendingMachineMoney,
+                        CountMoney = count
+                    },
+                    JsonRequestBehavior.AllowGet);
+            }
+            catch(VendingMachineServiceException ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
         }
 
         /// <summary>
