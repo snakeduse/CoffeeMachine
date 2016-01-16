@@ -15,6 +15,7 @@ namespace CoffeeMachine.Controllers
     public class HomeController : Controller
     {
         private IVendingMachineData _vendingMachine = VendingMachineDataSingleton.Instance;
+
         private readonly IVendingMachineService _vendingMachineService = 
             new VendingMachineService(VendingMachineDataSingleton.Instance);
 
@@ -30,14 +31,16 @@ namespace CoffeeMachine.Controllers
         [HttpGet]
         public ActionResult AddMoney(int money)
         {
-            try {
+            try
+            {
                 _vendingMachineService.AddMoney(money);
-                var count = _vendingMachine.UserPurse.GetCount(money);
-
+                
+                // TODO: работать с данными напрямую плохо, но пока не ясно как более грамотно сделать.
+                // Гонять всю модель туда-сюда: плохо. Нужно передавать только требуемые данные
                 return Json(
                     new {
                         VendingMachineMoney = _vendingMachine.VendingMachineMoney,
-                        CountMoney = count
+                        CountMoney = _vendingMachine.UserPurse.GetCount(money)
                     },
                     JsonRequestBehavior.AllowGet);
             }
